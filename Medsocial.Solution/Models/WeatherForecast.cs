@@ -1,4 +1,4 @@
-namespace Medsocial.Solution;
+namespace Medsocial.Solution.Models;
 
 public class WeatherForecast
 {
