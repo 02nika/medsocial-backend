@@ -1,4 +1,5 @@
 using AutoMapper;
+using Entities.Exceptions;
 using Entities.Models;
 using Repository.Contracts;
 using Service.Contracts.Contracts;
@@ -31,6 +32,8 @@ public class UserService : IUserService
     public async Task<UserDto> GetUserAsync(string email, string password, bool trackChanges)
     {
         var user = await _repositoryManager.UserRepository.GetUserAsync(email, password, trackChanges);
+
+        if (user == null) throw new UserNotFoundException();
 
         return _mapper.Map<UserDto>(user);
     }
