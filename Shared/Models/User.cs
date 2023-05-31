@@ -1,4 +1,4 @@
-namespace Medsocial.Solution.Models;
+namespace Shared.Models;
 
 public class User
 {

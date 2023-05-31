@@ -4,6 +4,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>Medsocial.Solution</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,6 +18,13 @@
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.0" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Repository.Contracts\Repository.Contracts.csproj" />
+      <ProjectReference Include="..\Repository\Repository.csproj" />
+      <ProjectReference Include="..\Service\Service.csproj" />
+      <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
 </Project>
