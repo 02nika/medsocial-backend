@@ -16,7 +16,7 @@ public class TokenService : ITokenService
     {
         _configuration = configuration;
     }
-    
+
     public string CreateToken(string userEmail, UserStatusDtoEnum userStatusName)
     {
         var claims = new List<Claim>
@@ -32,10 +32,32 @@ public class TokenService : ITokenService
 
         var token = new JwtSecurityToken(
             claims: claims,
-            expires: DateTime.Now.AddHours(8),
+            expires: DateTime.Now.AddMinutes(1),
             signingCredentials: credentials
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public bool ValidateRefreshToken(string refreshToken)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var validationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["AppSettings:Key"]!)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+
+        try
+        {
+            tokenHandler.ValidateToken(refreshToken, validationParameters, out _);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
