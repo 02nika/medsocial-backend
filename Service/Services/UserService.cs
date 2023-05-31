@@ -17,7 +17,7 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<User> AddUserAsync(UserDto userDto)
+    public async Task<Guid> AddUserAsync(UserDto userDto)
     {
         var user = _mapper.Map<User>(userDto);
 
@@ -25,7 +25,7 @@ public class UserService : IUserService
 
         await _repositoryManager.SaveAsync();
 
-        return user;
+        return user.Id;
     }
 
     public async Task<UserDto> GetUserAsync(string email, string password, bool trackChanges)

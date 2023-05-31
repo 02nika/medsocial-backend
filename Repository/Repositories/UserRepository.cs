@@ -18,6 +18,5 @@ public class UserRepository : RepositoryBase<User>, IUserRepository
 
     public async Task<User?> GetUserAsync(string email, string password, bool trackChanges) => 
         await FindByCondition(user => user.Email == email && user.Password == password, trackChanges)
-            .Include(x => x.Status)
             .FirstOrDefaultAsync();
 }

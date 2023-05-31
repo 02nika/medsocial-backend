@@ -1,4 +1,3 @@
-using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 
@@ -22,9 +21,9 @@ public class AuthController : ControllerBase
         var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(userDto.Password);
         userDto.Password = passwordHash;
         
-        var newUser = await _serviceManager.UserService.AddUserAsync(userDto);
+        var userGuid = await _serviceManager.UserService.AddUserAsync(userDto);
         
-        return Ok(newUser);
+        return Ok(userGuid);
     }
     
     [HttpPost("login")]
@@ -33,7 +32,7 @@ public class AuthController : ControllerBase
         var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(password);
         var user = await _serviceManager.UserService.GetUserAsync(email, passwordHash, false);
         
-        var token = _serviceManager.TokenService.CreateToken(email, user.Status.Name!);
+        var token = _serviceManager.TokenService.CreateToken(email, user.Status.ToString());
     
         return Ok(token);
     }
