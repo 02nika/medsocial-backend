@@ -9,6 +9,5 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<UserDto, User>().ReverseMap();
-        CreateMap<UserStatusDto, UserStatus>().ReverseMap();
     }
 }

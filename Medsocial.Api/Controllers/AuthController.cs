@@ -32,7 +32,7 @@ public class AuthController : ControllerBase
         var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(password);
         var user = await _serviceManager.UserService.GetUserAsync(email, passwordHash, false);
         
-        var token = _serviceManager.TokenService.CreateToken(email, user.Status.ToString());
+        var token = _serviceManager.TokenService.CreateToken(email, user.Status);
     
         return Ok(token);
     }

@@ -1,6 +1,8 @@
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
+
 using Repository.Contracts;
+
 using Service.Contracts;
 using Service.Contracts.Contracts;
 using Service.Services;
