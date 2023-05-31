@@ -37,4 +37,9 @@ public class UserService : IUserService
 
         return _mapper.Map<UserDto>(user);
     }
+    
+    public async Task<bool> UserExistAsync(string email)
+    {
+        return await _repositoryManager.UserRepository.UserExistAsync(email);
+    }
 }

@@ -1,6 +1,6 @@
+using Entities.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
-
 using Shared.Dtos;
 
 namespace Medsocial.Solution.Controllers;
@@ -18,6 +18,8 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult> Register([FromBody]UserDto userDto)
     {
+        if (await _serviceManager.UserService.UserExistAsync(userDto.Email)) throw new UserAlreadyExistsException();
+        
         var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(userDto.Password);
         userDto.Password = passwordHash;
         
@@ -27,12 +29,12 @@ public class AuthController : ControllerBase
     }
     
     [HttpPost("login")]
-    public async Task<ActionResult> Login(string email, string password)
+    public async Task<ActionResult> Login(UserLoginDto userLoginDto)
     {
-        var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(password);
-        var user = await _serviceManager.UserService.GetUserAsync(email, passwordHash, false);
+        var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(userLoginDto.Password);
+        var user = await _serviceManager.UserService.GetUserAsync(userLoginDto.Email, passwordHash, false);
         
-        var token = _serviceManager.TokenService.CreateToken(email, user.Status);
+        var token = _serviceManager.TokenService.CreateToken(userLoginDto.Email, user.Status);
     
         return Ok(token);
     }

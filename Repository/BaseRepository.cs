@@ -32,4 +32,6 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     public void Update(T entity) => DbSet.Update(entity);
 
     public void Delete(T entity) => DbSet.Remove(entity);
+
+    public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression) => await DbSet.AnyAsync(expression);
 }

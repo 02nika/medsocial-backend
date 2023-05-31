@@ -1,12 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using Shared.Enums;
 
 namespace Shared.Dtos;
 
-public class UserDto
+public class UserLoginDto
 {
-    public UserStatusDtoEnum Status { get; set; }
-    
     [Required]
     [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
     public string Email { get; set; }
