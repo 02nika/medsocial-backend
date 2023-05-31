@@ -1,15 +1,12 @@
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.Dtos;
-using Shared.Enums;
-using Shared.Models;
 
 namespace Medsocial.Solution.Controllers;
 
 public class AuthController : ControllerBase
 {
-    private readonly User _user = new();
-
     private readonly IServiceManager _serviceManager;
 
     public AuthController(IServiceManager serviceManager)
@@ -18,23 +15,23 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public ActionResult<User> Register(UserDto request)
+    public async Task<ActionResult<User>> Register([FromBody]UserDto userDto)
     {
-        var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
-
-        _user.Email = request.Email;
-        _user.Password = passwordHash;
-
-        return Ok(_user);
+        var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(userDto.Password);
+        userDto.Password = passwordHash;
+        
+        var newUser = await _serviceManager.UserService.AddUserAsync(userDto);
+        
+        return Ok(newUser);
     }
 
     [HttpPost("login")]
-    public ActionResult<User> Login(UserDto userDto)
+    public async Task<ActionResult<User>> Login(string email, string password)
     {
-        _user.Email = userDto.Email;
-        _user.Password = userDto.Password;
+        var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(password);
+        var user = await _serviceManager.UserService.GetUserAsync(email, passwordHash, false);
         
-        var token = _serviceManager.TokenService.CreateToken(_user, UserStatus.Costumer);
+        var token = _serviceManager.TokenService.CreateToken(email, user.Status.Name);
 
         return Ok(token);
     }

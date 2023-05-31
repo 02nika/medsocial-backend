@@ -4,8 +4,6 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Service.Contracts.Contracts;
-using Shared.Enums;
-using Shared.Models;
 
 namespace Service.Services;
 
@@ -18,11 +16,12 @@ public class TokenService : ITokenService
         _configuration = configuration;
     }
     
-    public string CreateToken(User user, UserStatus userStatus)
+    public string CreateToken(string userEmail, string userStatusName)
     {
         var claims = new List<Claim>
         {
-            new(ClaimTypes.Role, userStatus.ToString())
+            new(ClaimTypes.Name, userEmail),
+            new(ClaimTypes.Role, userStatusName)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(

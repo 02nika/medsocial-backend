@@ -8,7 +8,7 @@ public class UserStatus
 {
     public Enums.UserStatus Id { get; set; }
     
-    [Required(ErrorMessage = "State is required field")]
-    [MaxLength(10, ErrorMessage = "State length cannot be more than 10 characters")]
+    [Required(ErrorMessage = "Name is required field")]
+    [MaxLength(10, ErrorMessage = "Name length cannot be more than 10 characters")]
     public string Name { get; set; }
 }

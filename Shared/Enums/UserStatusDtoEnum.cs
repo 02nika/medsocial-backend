@@ -1,6 +1,6 @@
 namespace Shared.Enums;
 
-public enum UserStatus
+public enum UserStatusDtoEnum
 {
     Costumer,
     Doctor,

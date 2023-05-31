@@ -27,7 +27,7 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
             ? DbSet.Where(expression).AsNoTracking()
             : DbSet.Where(expression);
 
-    public async Task Create(T entity) => await DbSet.AddAsync(entity);
+    public async Task CreateAsync(T entity) => await DbSet.AddAsync(entity);
 
     public void Update(T entity) => DbSet.Update(entity);
 
