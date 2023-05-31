@@ -16,7 +16,7 @@ public class UserService : IUserService
         _repositoryManager = repositoryManager;
         _mapper = mapper;
     }
-    
+
     public async Task<User> AddUserAsync(UserDto userDto)
     {
         var user = _mapper.Map<User>(userDto);
@@ -27,11 +27,11 @@ public class UserService : IUserService
 
         return user;
     }
-    
+
     public async Task<UserDto> GetUserAsync(string email, string password, bool trackChanges)
     {
         var user = await _repositoryManager.UserRepository.GetUserAsync(email, password, trackChanges);
-        
+
         return _mapper.Map<UserDto>(user);
     }
 }

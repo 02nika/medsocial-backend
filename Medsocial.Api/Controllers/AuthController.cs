@@ -1,10 +1,12 @@
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+
 using Shared.Dtos;
 
 namespace Medsocial.Solution.Controllers;
 
+[ApiController]
 public class AuthController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
@@ -15,7 +17,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<User>> Register([FromBody]UserDto userDto)
+    public async Task<ActionResult> Register([FromBody]UserDto userDto)
     {
         var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(userDto.Password);
         userDto.Password = passwordHash;
@@ -24,15 +26,15 @@ public class AuthController : ControllerBase
         
         return Ok(newUser);
     }
-
+    
     [HttpPost("login")]
-    public async Task<ActionResult<User>> Login(string email, string password)
+    public async Task<ActionResult> Login(string email, string password)
     {
         var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(password);
         var user = await _serviceManager.UserService.GetUserAsync(email, passwordHash, false);
         
-        var token = _serviceManager.TokenService.CreateToken(email, user.Status.Name);
-
+        var token = _serviceManager.TokenService.CreateToken(email, user.Status.Name!);
+    
         return Ok(token);
     }
 }
