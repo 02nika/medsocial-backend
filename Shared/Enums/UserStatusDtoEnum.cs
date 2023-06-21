@@ -2,7 +2,7 @@ namespace Shared.Enums;
 
 public enum UserStatusDtoEnum
 {
-    Costumer,
-    Doctor,
-    Admin
+    Costumer = 1,
+    Doctor = 2,
+    Admin = 3
 }

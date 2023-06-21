@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
         var passwordHash = _serviceManager.PasswordService.ComputeSha256Hash(userDto.Password);
         userDto.Password = passwordHash;
         
-        var userGuid = await _serviceManager.UserService.AddUserAsync(userDto);
+        var userGuid = await _serviceManager.UserService.CreateUserAsync(userDto);
         
         return Ok(userGuid);
     }

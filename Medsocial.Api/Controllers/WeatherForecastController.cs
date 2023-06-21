@@ -20,7 +20,7 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet(Name = "GetWeatherForecast"), Authorize(Roles = "Doctor")]
+    [HttpGet(Name = "GetWeatherForecast"), Authorize(Roles = "Costumer")]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast

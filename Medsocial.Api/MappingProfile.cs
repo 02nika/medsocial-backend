@@ -9,5 +9,9 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<UserDto, User>().ReverseMap();
+
+        CreateMap<CityDto, City>().ReverseMap();
+        CreateMap<CountryDto, Country>().ReverseMap();
+        CreateMap<TimezoneDto, Timezone>().ReverseMap();
     }
 }

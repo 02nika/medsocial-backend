@@ -18,7 +18,7 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<Guid> AddUserAsync(UserDto userDto)
+    public async Task<Guid> CreateUserAsync(UserDto userDto)
     {
         var user = _mapper.Map<User>(userDto);
 
