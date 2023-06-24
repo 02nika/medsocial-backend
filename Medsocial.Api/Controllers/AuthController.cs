@@ -6,6 +6,7 @@ using Shared.Dtos;
 namespace Medsocial.Solution.Controllers;
 
 [ApiController]
+[Route("api/auth")]
 public class AuthController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
