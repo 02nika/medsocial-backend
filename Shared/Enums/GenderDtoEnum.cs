@@ -1,6 +1,6 @@
 namespace Shared.Enums;
 
-public enum GenderDto
+public enum GenderDtoEnum
 {
     Male = 1,
     Female = 2,

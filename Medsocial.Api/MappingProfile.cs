@@ -13,5 +13,6 @@ public class MappingProfile : Profile
         CreateMap<CityDto, City>().ReverseMap();
         CreateMap<CountryDto, Country>().ReverseMap();
         CreateMap<TimezoneDto, Timezone>().ReverseMap();
+        CreateMap<Gender, GenderDto>().ReverseMap();
     }
 }

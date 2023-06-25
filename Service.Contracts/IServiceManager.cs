@@ -8,4 +8,6 @@ public interface IServiceManager
     IPasswordService PasswordService { get; }
     IUserService UserService { get; }
     ICityService CityService { get; }
+    ICountryService CountryService { get; }
+    IGenderService GenderService { get; }
 }

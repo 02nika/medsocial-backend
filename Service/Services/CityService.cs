@@ -1,4 +1,5 @@
 using AutoMapper;
+using Entities.Exceptions;
 using Repository.Contracts;
 using Service.Contracts.Contracts;
 using Shared.Dtos;
@@ -16,9 +17,11 @@ public class CityService : ICityService
         _mapper = mapper;
     }
 
-    public async Task<List<CityDto>> GetCitiesAsync(bool trackChanges)
+    public async Task<List<CityDto>> GetCitiesByCountryAsync(Guid countryId, bool trackChanges)
     {
-        var cities = await _repositoryManager.CityRepository.GetCitiesAsync(trackChanges);
+        var cities = await _repositoryManager.CityRepository.GetCitiesByCountryAsync(countryId, trackChanges);
+
+        if (cities.Count == 0) throw new CitiesNotFoundException();
 
         return _mapper.Map<List<CityDto>>(cities);
     }

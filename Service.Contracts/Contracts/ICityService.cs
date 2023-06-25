@@ -4,5 +4,5 @@ namespace Service.Contracts.Contracts;
 
 public interface ICityService
 {
-    Task<List<CityDto>> GetCitiesAsync(bool trackChanges);
+    Task<List<CityDto>> GetCitiesByCountryAsync(Guid countryId, bool trackChanges);
 }

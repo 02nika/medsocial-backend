@@ -11,7 +11,7 @@ public class CityRepository : RepositoryBase<City>, ICityRepository
     {
     }
 
-    public async Task<List<City>> GetCitiesAsync(bool trackChanges) =>
-        await FindAll(trackChanges).ToListAsync();
-
+    public async Task<List<City>> GetCitiesByCountryAsync(Guid countryId, bool trackChanges) =>
+        await FindByCondition((city) => city.CountyId == countryId, trackChanges)
+            .ToListAsync();
 }

@@ -14,10 +14,10 @@ public class CityController : ControllerBase
         _serviceManager = serviceManager;
     }
     
-    [HttpGet]
-    public async Task<ActionResult> GetAllCities()
+    [HttpGet("by-country/{countryId}")]
+    public async Task<ActionResult> GetCitiesByCountry(Guid countryId)
     {
-        var cities = await _serviceManager.CityService.GetCitiesAsync(false);
+        var cities = await _serviceManager.CityService.GetCitiesByCountryAsync(countryId, false);
         return Ok(cities);
     }
 }

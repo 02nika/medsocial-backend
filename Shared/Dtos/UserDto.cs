@@ -14,7 +14,7 @@ public class UserDto
     public string LastName { get; set; }
     
     [Required]
-    public GenderDto Gender { get; set; }
+    public GenderDtoEnum Gender { get; set; }
     
     [Required]
     [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
