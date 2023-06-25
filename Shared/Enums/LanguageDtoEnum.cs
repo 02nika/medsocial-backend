@@ -1,6 +1,6 @@
 namespace Shared.Enums;
 
-public enum LanguageDto
+public enum LanguageDtoEnum
 {
     English = 1,
     Georgian = 2,

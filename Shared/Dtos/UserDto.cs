@@ -29,7 +29,7 @@ public class UserDto
     [Required]
     public Guid TimezoneId { get; set; }
     
-    public LanguageDto Language { get; set; }
+    public LanguageDtoEnum Language { get; set; }
     
     [Required]
     [MinLength(7, ErrorMessage = "Password Must be 7 symbols at least.")]

@@ -6,5 +6,7 @@ public interface IRepositoryManager
     public ICityRepository CityRepository { get; }
     public ICountryRepository CountryRepository { get; }
     public IGenderRepository GenderRepository { get; }
+    public ILanguageRepository LanguageRepository { get; }
+    public ITimezoneRepository TimezoneRepository { get; }
     Task SaveAsync();
 }

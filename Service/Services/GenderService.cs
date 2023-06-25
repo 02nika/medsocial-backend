@@ -2,7 +2,6 @@ using AutoMapper;
 using Repository.Contracts;
 using Service.Contracts.Contracts;
 using Shared.Dtos;
-using Shared.Enums;
 
 namespace Service.Services;
 

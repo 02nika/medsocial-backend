@@ -17,6 +17,8 @@ public class ServiceManager : IServiceManager
     private readonly Lazy<ICityService> _cityService;
     private readonly Lazy<ICountryService> _countryService;
     private readonly Lazy<IGenderService> _genderService;
+    private readonly Lazy<ILanguageService> _languageService;
+    private readonly Lazy<ITimezoneService> _timezoneService;
 
     public ServiceManager(IRepositoryManager repositoryManager, IConfiguration configuration, IMapper mapper)
     {
@@ -27,6 +29,8 @@ public class ServiceManager : IServiceManager
         _cityService = new Lazy<ICityService>(() => new CityService(repositoryManager, mapper));
         _countryService = new Lazy<ICountryService>(() => new CountryService(repositoryManager, mapper));
         _genderService = new Lazy<IGenderService>(() => new GenderService(repositoryManager, mapper));
+        _languageService = new Lazy<ILanguageService>(() => new LanguageService(repositoryManager, mapper));
+        _timezoneService = new Lazy<ITimezoneService>(() => new TimezoneService(repositoryManager, mapper));
     }
 
     public ITokenService TokenService => _tokenService.Value;
@@ -35,4 +39,6 @@ public class ServiceManager : IServiceManager
     public IUserService UserService => _userService.Value;
     public ICountryService CountryService => _countryService.Value;
     public IGenderService GenderService => _genderService.Value;
+    public ILanguageService LanguageService => _languageService.Value;
+    public ITimezoneService TimezoneService => _timezoneService.Value;
 }
